@@ -18,6 +18,15 @@ h1 {
     position: relative;
     align-self: center;
 }
+
+h5 {
+    font-size:x-large;
+    font-weight: bold;
+}
+
+.record {
+    color: brown;
+}
 #score {
     display: flex;
     align-content: center;

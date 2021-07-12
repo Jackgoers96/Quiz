@@ -8,6 +8,12 @@ var quizArea = document.getElementById("questionArea")
 var letTheGamesBegin
 let timeEl = 61;
 var highScores = document.getElementById("highScores")
+var newScore = {
+    name: '',
+    number: '',
+
+}
+
 
 
 function startTimer() {
@@ -24,7 +30,7 @@ function score() {
 
     if(timeEl <= 0){
         clearInterval(setInterval1);
-        displayLoseMessage();
+        displayLoseGame();
     };
 }
 
@@ -92,8 +98,8 @@ var quizMain = [
     
     {
         question: "This well-loved robot was the first to be fully remote controlled",
-        choices:["BB-8", "R2-D2", "C-3PO", "R4"],
-        answer: "BB-8"
+        choices:["bb-8", "R2-D2", "C-3PO", "R4"],
+        answer: "bb-8"
     }]
     
 function gameOver() {
@@ -113,36 +119,58 @@ function displayWinGame() {
         newScore.textContent = ("Nice job! Your score: " + timeEl);
         highScores.append(newScore);
 
-        // Create a form synamically
-        var form = document.createElement('form');
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "submit.php");
+
+        // // Create a form synamically
+        // var form = document.createElement('form');
+        // form.setAttribute("method", "post");
+        // form.setAttribute("action", "submit.php");
   
-        // Create an input element for Full Name
-        var FN = document.createElement("input");
-        FN.setAttribute("type", "text");
-        FN.setAttribute("name", "FullName");
-        FN.setAttribute("placeholder", "Your Name");
-        // create a submit button
-        var s = document.createElement("input");
-        s.setAttribute("type", "submit");
-        s.setAttribute("value", "Submit");
+        // // Create an input element for Full Name
+        // var FN = document.createElement("input");
+        // FN.setAttribute("type", "text");
+        // FN.setAttribute("name", "FullName");
+        // FN.setAttribute("placeholder", "Your Name");
+        // // create a submit button
+        // var s = document.createElement("input");
+        // s.setAttribute("type", "submit");
+        // s.setAttribute("value", "Submit");
           
-        // Append the full name input to the form
-        form.appendChild(FN); 
-         // Append the submit button to the form
-         form.appendChild(s); 
+        // // Append the full name input to the form
+        // form.appendChild(FN); 
+        //  // Append the submit button to the form
+        //  form.appendChild(s); 
   
-         document.getElementsByTagName("body")[0]
-        .appendChild(form);
+        //  document.getElementsByTagName("body")[0]
+        // .appendChild(form);
   
 
     
 }
 function displayLoseGame() {
     confirm("You're out of time! Try again?");
-    if (confirm = true) {
-        startTimer()
+    if (true) {
+        location.reload()
     }
 }
+
+function highScore() {
+    var initialsEl = document.getElementById('initials').value;
+    //grab the id and put a .value on it
+    var newScore = {
+        intials:initialsEl,
+        score:timeLeft,
+    }
+    //Either grabs something from localStorage or store something into localStorage
+    var highScoreArray = JSON.parse(localStorage.getItem('highscore')) || []
+    //adds an item to the beginning of an array
+    highScoreArray.push(newScore),
+    //stores the array locally
+    localStorage.setItem('highscore', JSON.stringify(highScoreArray))
+}
+
+//loop through array and display the highscores
+
+
+startButton.addEventListener("click", gameStart);
+submitInitials.addEventListener('click', highScore);
 

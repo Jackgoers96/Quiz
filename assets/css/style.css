@@ -47,6 +47,10 @@ content {
     align-items: center;
     justify-content: unset;
 }
+#questionArea {
+    display: flex;
+    flex-direction: column;
+}
 
 .user-choice {
     padding: 2%;
@@ -58,6 +62,10 @@ content {
 
 
 }
+#imSpecial {
+    display: flex;
+    justify-content: center;
+}
 #start {
     border-radius: 10px;
     padding: 2%;
@@ -68,6 +76,8 @@ content {
     font-size: large;
     width: 300px;
     height: 75px;
+
+  
 }
 
 #highScores {
@@ -75,5 +85,18 @@ content {
     margin: 2%;
     align-content: column;
     justify-content: center;
+
+}
+#gg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.gg {
+    display:flex;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
 
 }

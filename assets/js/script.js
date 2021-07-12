@@ -6,18 +6,14 @@ var setInterval1;
 var questions = [0];
 var quizArea = document.getElementById("questionArea")
 var letTheGamesBegin
-let timeEl = 61;
+let timeEl = 3;
 var highScores = document.getElementById("highScores")
-var newScore = {
-    name: '',
-    number: '',
-
-}
+var bodyEl = document.getElementById("bodyEl")
 
 
 
 function startTimer() {
-    startButtonEl.remove();
+    bodyEl.remove();
     setInterval1 = setInterval(score, 1000);
     letTheGamesBegin = quizLoop();
 }
@@ -46,7 +42,7 @@ function quizLoop() {
     for (let i = 0; i < question.choices.length; i++) {
         //created automatically and can be changed
         const element = question.choices[i];
-        var choicesButton= document.createElement('button');
+        var choicesButton = document.createElement('button');
         choicesButton.textContent = element;
         choicesButton.setAttribute('class', "user-choice");
         //add a value to the button for comparison
@@ -97,7 +93,7 @@ var quizMain = [
     },
     
     {
-        question: "This well-loved robot was the first to be fully remote controlled",
+        question: "This well-loved robot was the first to be fully remote controlled:",
         choices:["bb-8", "R2-D2", "C-3PO", "R4"],
         answer: "bb-8"
     }]
@@ -158,7 +154,7 @@ function highScore() {
     //grab the id and put a .value on it
     var newScore = {
         intials:initialsEl,
-        score:timeLeft,
+        score:timeEl,
     }
     //Either grabs something from localStorage or store something into localStorage
     var highScoreArray = JSON.parse(localStorage.getItem('highscore')) || []
@@ -169,8 +165,5 @@ function highScore() {
 }
 
 //loop through array and display the highscores
-
-
-startButton.addEventListener("click", gameStart);
 submitInitials.addEventListener('click', highScore);
 

@@ -6,7 +6,7 @@ var setInterval1;
 var questions = [0];
 var quizArea = document.getElementById("questionArea")
 var letTheGamesBegin
-let timeEl = 3;
+let timeEl = 61;
 var highScores = document.getElementById("highScores")
 var bodyEl = document.getElementById("bodyEl")
 
@@ -111,36 +111,21 @@ function displayWinGame() {
         gg.remove();
         quizArea.remove();
         clearInterval(setInterval1);
-        var newScore = document.createElement('h5');
-        newScore.textContent = ("Nice job! Your score: " + timeEl);
-        highScores.append(newScore);
+        var yourScore= document.createElement('h5');
+        yourScore.textContent = ("Nice job! Your score: " + timeEl);
+        highScores.append(yourScore);
+        var initials = document.createElement("input");
+        initials.setAttribute("type", "text");
+        initials.setAttribute("id", "submitInitials2");
+        var submitInitials = document.createElement("button");
+        submitInitials.textContent = ("Submit your initials!");
+        submitInitials.value = (initials.text);
+        highScores.append(initials);
+        highScores.append(submitInitials);
+        submitInitials.addEventListener('click', highScore);
+        // highScore();
+        
 
-
-        // // Create a form synamically
-        // var form = document.createElement('form');
-        // form.setAttribute("method", "post");
-        // form.setAttribute("action", "submit.php");
-  
-        // // Create an input element for Full Name
-        // var FN = document.createElement("input");
-        // FN.setAttribute("type", "text");
-        // FN.setAttribute("name", "FullName");
-        // FN.setAttribute("placeholder", "Your Name");
-        // // create a submit button
-        // var s = document.createElement("input");
-        // s.setAttribute("type", "submit");
-        // s.setAttribute("value", "Submit");
-          
-        // // Append the full name input to the form
-        // form.appendChild(FN); 
-        //  // Append the submit button to the form
-        //  form.appendChild(s); 
-  
-        //  document.getElementsByTagName("body")[0]
-        // .appendChild(form);
-  
-
-    
 }
 function displayLoseGame() {
     confirm("You're out of time! Try again?");
@@ -150,20 +135,20 @@ function displayLoseGame() {
 }
 
 function highScore() {
-    var initialsEl = document.getElementById('initials').value;
+    var initialsEl = document.getElementById("submitInitials2").value;
     //grab the id and put a .value on it
     var newScore = {
         intials:initialsEl,
         score:timeEl,
     }
     //Either grabs something from localStorage or store something into localStorage
-    var highScoreArray = JSON.parse(localStorage.getItem('highscore')) || []
+    var highScoreArray = JSON.parse(localStorage.getItem('highScores')) || []
     //adds an item to the beginning of an array
     highScoreArray.push(newScore),
     //stores the array locally
-    localStorage.setItem('highscore', JSON.stringify(highScoreArray))
+    localStorage.setItem('highScores', JSON.stringify(highScoreArray))
 }
 
-//loop through array and display the highscores
-submitInitials.addEventListener('click', highScore);
+// //loop through array and display the highscores
+// submitInitials.addEventListener('click', highScore);
 

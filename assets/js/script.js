@@ -7,7 +7,7 @@ var questions = [0];
 var quizArea = document.getElementById("questionArea")
 var letTheGamesBegin
 let timeEl = 61;
-var highScores = document.getElementById("highScores")
+var scoreBoard = document.getElementById("scoreBoard")
 var bodyEl = document.getElementById("bodyEl")
 
 
@@ -113,18 +113,27 @@ function displayWinGame() {
         clearInterval(setInterval1);
         var yourScore= document.createElement('h5');
         yourScore.textContent = ("Nice job! Your score: " + timeEl);
-        highScores.append(yourScore);
+        scoreBoard.append(yourScore);
         var initials = document.createElement("input");
         initials.setAttribute("type", "text");
         initials.setAttribute("id", "submitInitials2");
         var submitInitials = document.createElement("button");
         submitInitials.textContent = ("Submit your initials!");
+        scoreBoard.append(initials);
+        scoreBoard.append(submitInitials);
         submitInitials.value = (initials.text);
-        highScores.append(initials);
-        highScores.append(submitInitials);
         submitInitials.addEventListener('click', highScore);
         // highScore();
+        //initials, score loop
         
+    for (const highScore of highScoreArray) {
+        var listEl = document.createElement("li")
+        listEl.textContent = (highScore.initials + ";" + highScore.score);
+        scoreBoard.appendChild(listEl)
+        console.log(highScore.initials + ";" + highScore.score)
+               
+    }
+console.log(highScoreArray)
 
 }
 function displayLoseGame() {
@@ -133,21 +142,21 @@ function displayLoseGame() {
         location.reload()
     }
 }
+var highScoreArray = JSON.parse(localStorage.getItem('scoreBoard')) || []
 
 function highScore() {
     var initialsEl = document.getElementById("submitInitials2").value;
-    //grab the id and put a .value on it
     var newScore = {
-        intials:initialsEl,
+        initials:initialsEl,
         score:timeEl,
     }
-    //Either grabs something from localStorage or store something into localStorage
-    var highScoreArray = JSON.parse(localStorage.getItem('highScores')) || []
-    //adds an item to the beginning of an array
-    highScoreArray.push(newScore),
+highScoreArray.push(newScore),
     //stores the array locally
-    localStorage.setItem('highScores', JSON.stringify(highScoreArray))
+    localStorage.setItem('scoreBoard', JSON.stringify(highScoreArray))
+    console.log(highScoreArray)
+return JSON.stringify(highScoreArray)
 }
+
 
 // //loop through array and display the highscores
 // submitInitials.addEventListener('click', highScore);

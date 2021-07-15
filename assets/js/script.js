@@ -38,17 +38,13 @@ function quizLoop() {
     var questionsH2 = document.createElement('h2');
     questionsH2.textContent = question.question;
     quizArea.append(questionsH2);
-    //create multiple choice buttons and call the choices array
     for (let i = 0; i < question.choices.length; i++) {
-        //created automatically and can be changed
         const element = question.choices[i];
         var choicesButton = document.createElement('button');
         choicesButton.textContent = element;
         choicesButton.setAttribute('class', "user-choice");
-        //add a value to the button for comparison
         choicesButton.setAttribute('value', element);
         quizArea.append(choicesButton);
-        //create an onclick for answer comparison
         choicesButton.addEventListener('click', compareAnswer);
     }   
 }
@@ -128,12 +124,10 @@ function displayWinGame() {
         
     for (const highScore of highScoreArray) {
         var listEl = document.createElement("li")
-        listEl.textContent = (highScore.initials + ";" + highScore.score);
+        listEl.textContent = (highScore.initials + ": " + highScore.score);
         scoreBoard.appendChild(listEl)
-        console.log(highScore.initials + ";" + highScore.score)
-               
+                  
     }
-console.log(highScoreArray)
 
 }
 function displayLoseGame() {
@@ -151,13 +145,11 @@ function highScore() {
         score:timeEl,
     }
 highScoreArray.push(newScore),
-    //stores the array locally
-    localStorage.setItem('scoreBoard', JSON.stringify(highScoreArray))
-    console.log(highScoreArray)
-return JSON.stringify(highScoreArray)
+quizArea.append(scoreBoard);
+
+localStorage.setItem('scoreBoard', JSON.stringify(highScoreArray));
+return JSON.stringify(highScoreArray);
 }
+var highScoreArray = JSON.parse(localStorage.getItem('scoreBoard')) || []
 
-
-// //loop through array and display the highscores
-// submitInitials.addEventListener('click', highScore);
 
